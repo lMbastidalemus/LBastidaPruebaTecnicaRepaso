@@ -1,0 +1,51 @@
+﻿@model ML.Artista
+@{
+    ViewBag.Title = "Form";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div style="margin-left:38rem">
+    <h2>Registrar Artista</h2>
+</div>
+
+@using (Html.BeginForm("Form", "Artista", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.HiddenFor(model => model.IdArtista)
+    <form class="form-control">
+        <fieldset>
+            <div class="row" style="margin-left:28rem; margin-top:6rem">
+                <div class="col-md-4">
+                    @Html.LabelFor(model => model.NombreArtistico)
+                    @Html.TextBoxFor(model => model.NombreArtistico)
+                </div>
+
+                <div class="col-md-4" style="margin-left:5rem">
+                    @Html.LabelFor(model => model.Nombre)
+                    @Html.TextBoxFor(model => model.Nombre)
+                </div>
+            </div>
+
+            <div class="row" style="margin-left:28rem; margin-top:6rem">
+                <div class="col-md-4">
+                    @Html.LabelFor(model => model.ApellidoPaterno)
+                    @Html.TextBoxFor(model => model.ApellidoPaterno)
+                </div>
+
+                <div class="col-md-4" style="margin-left:10rem">
+                    @Html.LabelFor(model => model.ApellidoMaterno)
+                    @Html.TextBoxFor(model => model.ApellidoMaterno)
+                </div>
+            </div>
+
+            <div class="row" style="margin-left:28rem; margin-top:6rem">
+              
+                <div class="col-md-4" style="margin-left:20rem">
+                    @Html.LabelFor(model => model.FechaNacimiento)
+                    @Html.TextBoxFor(model => model.FechaNacimiento, new {type = "date"})
+                </div>
+            </div>
+        </fieldset>
+        <button type="submit" class="btn btn-success">Guardar artista</button>
+    </form>
+}
+

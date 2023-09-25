@@ -1,0 +1,38 @@
+﻿@model ML.GeneroMusical
+@{
+    ViewBag.Title = "GetAll";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div style="text-align:center">
+    <h2>Generos Musicales Registrados</h2>
+</div>
+<div class="table-responsive" style="margin-top:5rem">
+
+    <a class="btn btn-success" href="@Url.Action("Form", "Generomusical")">Agregar</a>
+    <table class="table table-responsive">
+        <thead>
+            <tr class="bg-danger">
+                <th>Id Genero Musical</th>
+                <th>Nombre </th>
+                <th>Editar</th>
+                <th>Eliminar</th>
+            </tr>
+        </thead>
+
+        <tbody style ="background:#5de8169c">
+            @foreach (ML.GeneroMusical generoMusical in Model.Generos)
+            {
+                <tr class="table-">
+                    <td>@generoMusical.IdGeneroMusical</td>
+                    <td>@generoMusical.Nombre</td>
+                    <td><a class="btn btn-warning" href="@Url.Action("Form", "Generomusical", new {IdGeneroMusical = generoMusical.IdGeneroMusical})">Editar</a></td>
+                    <td><a class="btn btn-danger" href="@Url.Action("Delete", "Generomusical", new {IdGeneroMusical = generoMusical.IdGeneroMusical})" onclick="return confirm('¿Seguro de eliminar este registro?');">Eliminar</a></td>
+                </tr>
+
+            }
+
+            </tbody>
+
+</table>
+</div>

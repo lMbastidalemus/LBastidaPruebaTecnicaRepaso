@@ -1,0 +1,483 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="LBastidaPruebaTecnicaRepasoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Artista">
+          <Key>
+            <PropertyRef Name="IdArtista" />
+          </Key>
+          <Property Name="IdArtista" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NombreArtistico" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ApellidoPaterno" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ApellidoMaterno" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="FechaNacimiento" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Disco">
+          <Key>
+            <PropertyRef Name="IdDisco" />
+          </Key>
+          <Property Name="IdDisco" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Titulo" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Duracion" Type="time" Precision="7" Nullable="false" />
+          <Property Name="Anio" Type="int" Nullable="false" />
+          <Property Name="Distribuidora" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Ventas" Type="int" Nullable="false" />
+          <Property Name="Disponibilidad" Type="varchar" MaxLength="2" Nullable="false" />
+          <Property Name="IdArtista" Type="int" />
+          <Property Name="IdGeneromusical" Type="int" />
+        </EntityType>
+        <EntityType Name="GeneroMusical">
+          <Key>
+            <PropertyRef Name="IdGeneroMusical" />
+          </Key>
+          <Property Name="IdGeneroMusical" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK__Disco__IdArtista__33D4B598">
+          <End Role="Artista" Type="Self.Artista" Multiplicity="0..1" />
+          <End Role="Disco" Type="Self.Disco" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Artista">
+              <PropertyRef Name="IdArtista" />
+            </Principal>
+            <Dependent Role="Disco">
+              <PropertyRef Name="IdArtista" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Disco__IdGenerom__34C8D9D1">
+          <End Role="GeneroMusical" Type="Self.GeneroMusical" Multiplicity="0..1" />
+          <End Role="Disco" Type="Self.Disco" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GeneroMusical">
+              <PropertyRef Name="IdGeneroMusical" />
+            </Principal>
+            <Dependent Role="Disco">
+              <PropertyRef Name="IdGeneromusical" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="AddArtista" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="NombreArtistico" Type="varchar" Mode="In" />
+          <Parameter Name="Nombre" Type="varchar" Mode="In" />
+          <Parameter Name="ApellidoPaterno" Type="varchar" Mode="In" />
+          <Parameter Name="ApellidoMaterno" Type="varchar" Mode="In" />
+          <Parameter Name="FechaNacimiento" Type="date" Mode="In" />
+        </Function>
+        <Function Name="ADDDisco" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Titulo" Type="varchar" Mode="In" />
+          <Parameter Name="Duracion" Type="time" Mode="In" />
+          <Parameter Name="Anio" Type="int" Mode="In" />
+          <Parameter Name="Distribuidora" Type="varchar" Mode="In" />
+          <Parameter Name="Ventas" Type="int" Mode="In" />
+          <Parameter Name="Disponibilidad" Type="varchar" Mode="In" />
+          <Parameter Name="IdArtista" Type="int" Mode="In" />
+          <Parameter Name="IdGeneromusical" Type="int" Mode="In" />
+        </Function>
+        <Function Name="AddGenero" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Nommbre" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="deleteArtista" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdArtista" Type="int" Mode="In" />
+        </Function>
+        <Function Name="DeleteDisco" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdDisco" Type="int" Mode="In" />
+        </Function>
+        <Function Name="DeleteGenero" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdGeneroMusical" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetAllArtista" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetAllDisco" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetAllGenero" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="GetById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdGeneroMusical" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetByIdArtista" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdArtista" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetByIdDisco" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdDisco" Type="int" Mode="In" />
+        </Function>
+        <Function Name="UpdateArtista" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdArtista" Type="int" Mode="In" />
+          <Parameter Name="NombreArtistico" Type="varchar" Mode="In" />
+          <Parameter Name="Nombre" Type="varchar" Mode="In" />
+          <Parameter Name="ApellidoPaterno" Type="varchar" Mode="In" />
+          <Parameter Name="ApellidoMaterno" Type="varchar" Mode="In" />
+          <Parameter Name="FechaNacimiento" Type="date" Mode="In" />
+        </Function>
+        <Function Name="UpdateDisco" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdDisco" Type="int" Mode="In" />
+          <Parameter Name="Titulo" Type="varchar" Mode="In" />
+          <Parameter Name="Duracion" Type="time" Mode="In" />
+          <Parameter Name="Anio" Type="int" Mode="In" />
+          <Parameter Name="Distribuidora" Type="varchar" Mode="In" />
+          <Parameter Name="Ventas" Type="int" Mode="In" />
+          <Parameter Name="Disponibilidad" Type="varchar" Mode="In" />
+          <Parameter Name="IdArtista" Type="int" Mode="In" />
+          <Parameter Name="IdGeneromusical" Type="int" Mode="In" />
+        </Function>
+        <Function Name="UpdateGenero" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdGeneroMusical" Type="int" Mode="In" />
+          <Parameter Name="Nombre" Type="varchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="LBastidaPruebaTecnicaRepasoModelStoreContainer">
+          <EntitySet Name="Artista" EntityType="Self.Artista" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Disco" EntityType="Self.Disco" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GeneroMusical" EntityType="Self.GeneroMusical" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Disco__IdArtista__33D4B598" Association="Self.FK__Disco__IdArtista__33D4B598">
+            <End Role="Artista" EntitySet="Artista" />
+            <End Role="Disco" EntitySet="Disco" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Disco__IdGenerom__34C8D9D1" Association="Self.FK__Disco__IdGenerom__34C8D9D1">
+            <End Role="GeneroMusical" EntitySet="GeneroMusical" />
+            <End Role="Disco" EntitySet="Disco" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="LBastidaPruebaTecnicaRepasoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Artista">
+          <Key>
+            <PropertyRef Name="IdArtista" />
+          </Key>
+          <Property Name="IdArtista" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NombreArtistico" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ApellidoPaterno" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ApellidoMaterno" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FechaNacimiento" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Discoes" Relationship="LBastidaPruebaTecnicaRepasoModel.FK__Disco__IdArtista__33D4B598" FromRole="Artista" ToRole="Disco" />
+        </EntityType>
+        <EntityType Name="GeneroMusical">
+          <Key>
+            <PropertyRef Name="IdGeneroMusical" />
+          </Key>
+          <Property Name="IdGeneroMusical" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Discoes" Relationship="LBastidaPruebaTecnicaRepasoModel.FK__Disco__IdGenerom__34C8D9D1" FromRole="GeneroMusical" ToRole="Disco" />
+        </EntityType>
+        <EntityContainer Name="LBastidaPruebaTecnicaRepasoEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Artistas" EntityType="Self.Artista" />
+          <EntitySet Name="GeneroMusicals" EntityType="Self.GeneroMusical" />
+          <FunctionImport Name="AddGenero">
+          <Parameter Name="Nommbre" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="DeleteGenero">
+          <Parameter Name="IdGeneroMusical" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetAllGenero" ReturnType="Collection(LBastidaPruebaTecnicaRepasoModel.GetAllGenero_Result)" />
+          <FunctionImport Name="GetById" ReturnType="Collection(LBastidaPruebaTecnicaRepasoModel.GetById_Result)">
+          <Parameter Name="IdGeneroMusical" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="UpdateGenero">
+            <Parameter Name="IdGeneroMusical" Mode="In" Type="Int32" />
+            <Parameter Name="Nombre" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="AddArtista">
+            <Parameter Name="NombreArtistico" Mode="In" Type="String" />
+            <Parameter Name="Nombre" Mode="In" Type="String" />
+            <Parameter Name="ApellidoPaterno" Mode="In" Type="String" />
+            <Parameter Name="ApellidoMaterno" Mode="In" Type="String" />
+            <Parameter Name="FechaNacimiento" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="deleteArtista">
+          <Parameter Name="IdArtista" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetAllArtista" ReturnType="Collection(LBastidaPruebaTecnicaRepasoModel.GetAllArtista_Result)" />
+          <FunctionImport Name="GetByIdArtista" ReturnType="Collection(LBastidaPruebaTecnicaRepasoModel.GetByIdArtista_Result)">
+          <Parameter Name="IdArtista" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="UpdateArtista">
+            <Parameter Name="IdArtista" Mode="In" Type="Int32" />
+            <Parameter Name="NombreArtistico" Mode="In" Type="String" />
+            <Parameter Name="Nombre" Mode="In" Type="String" />
+            <Parameter Name="ApellidoPaterno" Mode="In" Type="String" />
+            <Parameter Name="ApellidoMaterno" Mode="In" Type="String" />
+            <Parameter Name="FechaNacimiento" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="DeleteDisco">
+          <Parameter Name="IdDisco" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ADDDisco">
+            <Parameter Name="Titulo" Mode="In" Type="String" />
+            <Parameter Name="Duracion" Mode="In" Type="Time" />
+            <Parameter Name="Anio" Mode="In" Type="Int32" />
+            <Parameter Name="Distribuidora" Mode="In" Type="String" />
+            <Parameter Name="Ventas" Mode="In" Type="Int32" />
+            <Parameter Name="Disponibilidad" Mode="In" Type="String" />
+            <Parameter Name="IdArtista" Mode="In" Type="Int32" />
+            <Parameter Name="IdGeneromusical" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetAllDisco" ReturnType="Collection(LBastidaPruebaTecnicaRepasoModel.GetAllDisco_Result)" />
+          <FunctionImport Name="GetByIdDisco" ReturnType="Collection(LBastidaPruebaTecnicaRepasoModel.GetByIdDisco_Result)">
+          <Parameter Name="IdDisco" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="UpdateDisco">
+            <Parameter Name="IdDisco" Mode="In" Type="Int32" />
+            <Parameter Name="Titulo" Mode="In" Type="String" />
+            <Parameter Name="Duracion" Mode="In" Type="Time" />
+            <Parameter Name="Anio" Mode="In" Type="Int32" />
+            <Parameter Name="Distribuidora" Mode="In" Type="String" />
+            <Parameter Name="Ventas" Mode="In" Type="Int32" />
+            <Parameter Name="Disponibilidad" Mode="In" Type="String" />
+            <Parameter Name="IdArtista" Mode="In" Type="Int32" />
+            <Parameter Name="IdGeneromusical" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="Discoes" EntityType="LBastidaPruebaTecnicaRepasoModel.Disco" />
+          <AssociationSet Name="FK__Disco__IdArtista__33D4B598" Association="LBastidaPruebaTecnicaRepasoModel.FK__Disco__IdArtista__33D4B598">
+            <End Role="Artista" EntitySet="Artistas" />
+            <End Role="Disco" EntitySet="Discoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Disco__IdGenerom__34C8D9D1" Association="LBastidaPruebaTecnicaRepasoModel.FK__Disco__IdGenerom__34C8D9D1">
+            <End Role="GeneroMusical" EntitySet="GeneroMusicals" />
+            <End Role="Disco" EntitySet="Discoes" />
+          </AssociationSet>
+        </EntityContainer>
+        <ComplexType Name="GetAllGenero_Result">
+          <Property Type="Int32" Name="IdGeneroMusical" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="GetById_Result">
+          <Property Type="Int32" Name="IdGeneroMusical" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="GetAllArtista_Result">
+          <Property Type="Int32" Name="IdArtista" Nullable="false" />
+          <Property Type="String" Name="NombreArtistico" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="ApellidoPaterno" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="ApellidoMaterno" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="FechaNacimiento" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="GetByIdArtista_Result">
+          <Property Type="Int32" Name="IdArtista" Nullable="false" />
+          <Property Type="String" Name="NombreArtistico" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="NOmbre" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="ApellidoPaterno" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="ApellidoMaterno" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="FechaNacimiento" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="GetAllDisco_Result">
+          <Property Type="Int32" Name="IdDisco" Nullable="false" />
+          <Property Type="String" Name="Titulo" Nullable="false" MaxLength="100" />
+          <Property Type="Time" Name="Duracion" Nullable="false" />
+          <Property Type="Int32" Name="Anio" Nullable="false" />
+          <Property Type="String" Name="Distribuidora" Nullable="false" MaxLength="100" />
+          <Property Type="Int32" Name="Ventas" Nullable="false" />
+          <Property Type="String" Name="Disponibilidad" Nullable="false" MaxLength="2" />
+          <Property Type="Int32" Name="IdArtista" Nullable="false" />
+          <Property Type="String" Name="NombreArtistico" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="NombreArtista" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="ApellidoPaterno" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="ApellidoMaterno" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="FechaNacimiento" Nullable="false" />
+          <Property Type="Int32" Name="IdGeneromusical" Nullable="false" />
+          <Property Type="String" Name="NombreGeneroMusical" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="GetByIdDisco_Result">
+          <Property Type="Int32" Name="IdDisco" Nullable="false" />
+          <Property Type="String" Name="Titulo" Nullable="false" MaxLength="100" />
+          <Property Type="Time" Name="Duracion" Nullable="false" />
+          <Property Type="Int32" Name="Anio" Nullable="false" />
+          <Property Type="String" Name="Distribuidora" Nullable="false" MaxLength="100" />
+          <Property Type="Int32" Name="Ventas" Nullable="false" />
+          <Property Type="String" Name="Disponibilidad" Nullable="false" MaxLength="2" />
+          <Property Type="Int32" Name="IdArtista" Nullable="true" />
+          <Property Type="Int32" Name="IdGeneromusical" Nullable="true" />
+        </ComplexType>
+        <EntityType Name="Disco">
+          <Key>
+            <PropertyRef Name="IdDisco" />
+          </Key>
+          <Property Name="IdDisco" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Titulo" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Duracion" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="Anio" Type="Int32" Nullable="false" />
+          <Property Name="Distribuidora" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Ventas" Type="Int32" Nullable="false" />
+          <Property Name="Disponibilidad" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="IdArtista" Type="Int32" />
+          <Property Name="IdGeneromusical" Type="Int32" />
+          <NavigationProperty Name="Artista" Relationship="LBastidaPruebaTecnicaRepasoModel.FK__Disco__IdArtista__33D4B598" FromRole="Disco" ToRole="Artista" />
+          <NavigationProperty Name="GeneroMusical" Relationship="LBastidaPruebaTecnicaRepasoModel.FK__Disco__IdGenerom__34C8D9D1" FromRole="Disco" ToRole="GeneroMusical" />
+        </EntityType>
+        <Association Name="FK__Disco__IdArtista__33D4B598">
+          <End Type="LBastidaPruebaTecnicaRepasoModel.Artista" Role="Artista" Multiplicity="0..1" />
+          <End Type="LBastidaPruebaTecnicaRepasoModel.Disco" Role="Disco" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Artista">
+              <PropertyRef Name="IdArtista" />
+            </Principal>
+            <Dependent Role="Disco">
+              <PropertyRef Name="IdArtista" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Disco__IdGenerom__34C8D9D1">
+          <End Type="LBastidaPruebaTecnicaRepasoModel.GeneroMusical" Role="GeneroMusical" Multiplicity="0..1" />
+          <End Type="LBastidaPruebaTecnicaRepasoModel.Disco" Role="Disco" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GeneroMusical">
+              <PropertyRef Name="IdGeneroMusical" />
+            </Principal>
+            <Dependent Role="Disco">
+              <PropertyRef Name="IdGeneromusical" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="LBastidaPruebaTecnicaRepasoModelStoreContainer" CdmEntityContainer="LBastidaPruebaTecnicaRepasoEntities">
+          <EntitySetMapping Name="Artistas">
+            <EntityTypeMapping TypeName="LBastidaPruebaTecnicaRepasoModel.Artista">
+              <MappingFragment StoreEntitySet="Artista">
+                <ScalarProperty Name="IdArtista" ColumnName="IdArtista" />
+                <ScalarProperty Name="NombreArtistico" ColumnName="NombreArtistico" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="ApellidoPaterno" ColumnName="ApellidoPaterno" />
+                <ScalarProperty Name="ApellidoMaterno" ColumnName="ApellidoMaterno" />
+                <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GeneroMusicals">
+            <EntityTypeMapping TypeName="LBastidaPruebaTecnicaRepasoModel.GeneroMusical">
+              <MappingFragment StoreEntitySet="GeneroMusical">
+                <ScalarProperty Name="IdGeneroMusical" ColumnName="IdGeneroMusical" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="AddGenero" FunctionName="LBastidaPruebaTecnicaRepasoModel.Store.AddGenero" />
+          <FunctionImportMapping FunctionImportName="DeleteGenero" FunctionName="LBastidaPruebaTecnicaRepasoModel.Store.DeleteGenero" />
+          <FunctionImportMapping FunctionImportName="GetAllGenero" FunctionName="LBastidaPruebaTecnicaRepasoModel.Store.GetAllGenero">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LBastidaPruebaTecnicaRepasoModel.GetAllGenero_Result">
+                <ScalarProperty Name="IdGeneroMusical" ColumnName="IdGeneroMusical" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetById" FunctionName="LBastidaPruebaTecnicaRepasoModel.Store.GetById">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LBastidaPruebaTecnicaRepasoModel.GetById_Result">
+                <ScalarProperty Name="IdGeneroMusical" ColumnName="IdGeneroMusical" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UpdateGenero" FunctionName="LBastidaPruebaTecnicaRepasoModel.Store.UpdateGenero" />
+          <FunctionImportMapping FunctionImportName="AddArtista" FunctionName="LBastidaPruebaTecnicaRepasoModel.Store.AddArtista" />
+          <FunctionImportMapping FunctionImportName="deleteArtista" FunctionName="LBastidaPruebaTecnicaRepasoModel.Store.deleteArtista" />
+          <FunctionImportMapping FunctionImportName="GetAllArtista" FunctionName="LBastidaPruebaTecnicaRepasoModel.Store.GetAllArtista">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LBastidaPruebaTecnicaRepasoModel.GetAllArtista_Result">
+                <ScalarProperty Name="IdArtista" ColumnName="IdArtista" />
+                <ScalarProperty Name="NombreArtistico" ColumnName="NombreArtistico" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="ApellidoPaterno" ColumnName="ApellidoPaterno" />
+                <ScalarProperty Name="ApellidoMaterno" ColumnName="ApellidoMaterno" />
+                <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetByIdArtista" FunctionName="LBastidaPruebaTecnicaRepasoModel.Store.GetByIdArtista">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LBastidaPruebaTecnicaRepasoModel.GetByIdArtista_Result">
+                <ScalarProperty Name="IdArtista" ColumnName="IdArtista" />
+                <ScalarProperty Name="NombreArtistico" ColumnName="NombreArtistico" />
+                <ScalarProperty Name="NOmbre" ColumnName="NOmbre" />
+                <ScalarProperty Name="ApellidoPaterno" ColumnName="ApellidoPaterno" />
+                <ScalarProperty Name="ApellidoMaterno" ColumnName="ApellidoMaterno" />
+                <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UpdateArtista" FunctionName="LBastidaPruebaTecnicaRepasoModel.Store.UpdateArtista" />
+          <FunctionImportMapping FunctionImportName="DeleteDisco" FunctionName="LBastidaPruebaTecnicaRepasoModel.Store.DeleteDisco" />
+          <FunctionImportMapping FunctionImportName="ADDDisco" FunctionName="LBastidaPruebaTecnicaRepasoModel.Store.ADDDisco" />
+          <FunctionImportMapping FunctionImportName="GetAllDisco" FunctionName="LBastidaPruebaTecnicaRepasoModel.Store.GetAllDisco">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LBastidaPruebaTecnicaRepasoModel.GetAllDisco_Result">
+                <ScalarProperty Name="IdDisco" ColumnName="IdDisco" />
+                <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+                <ScalarProperty Name="Duracion" ColumnName="Duracion" />
+                <ScalarProperty Name="Anio" ColumnName="Anio" />
+                <ScalarProperty Name="Distribuidora" ColumnName="Distribuidora" />
+                <ScalarProperty Name="Ventas" ColumnName="Ventas" />
+                <ScalarProperty Name="Disponibilidad" ColumnName="Disponibilidad" />
+                <ScalarProperty Name="IdArtista" ColumnName="IdArtista" />
+                <ScalarProperty Name="NombreArtistico" ColumnName="NombreArtistico" />
+                <ScalarProperty Name="NombreArtista" ColumnName="NombreArtista" />
+                <ScalarProperty Name="ApellidoPaterno" ColumnName="ApellidoPaterno" />
+                <ScalarProperty Name="ApellidoMaterno" ColumnName="ApellidoMaterno" />
+                <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
+                <ScalarProperty Name="IdGeneromusical" ColumnName="IdGeneromusical" />
+                <ScalarProperty Name="NombreGeneroMusical" ColumnName="NombreGeneroMusical" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetByIdDisco" FunctionName="LBastidaPruebaTecnicaRepasoModel.Store.GetByIdDisco">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LBastidaPruebaTecnicaRepasoModel.GetByIdDisco_Result">
+                <ScalarProperty Name="IdDisco" ColumnName="IdDisco" />
+                <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+                <ScalarProperty Name="Duracion" ColumnName="Duracion" />
+                <ScalarProperty Name="Anio" ColumnName="Anio" />
+                <ScalarProperty Name="Distribuidora" ColumnName="Distribuidora" />
+                <ScalarProperty Name="Ventas" ColumnName="Ventas" />
+                <ScalarProperty Name="Disponibilidad" ColumnName="Disponibilidad" />
+                <ScalarProperty Name="IdArtista" ColumnName="IdArtista" />
+                <ScalarProperty Name="IdGeneromusical" ColumnName="IdGeneromusical" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UpdateDisco" FunctionName="LBastidaPruebaTecnicaRepasoModel.Store.UpdateDisco" />
+          <EntitySetMapping Name="Discoes">
+            <EntityTypeMapping TypeName="LBastidaPruebaTecnicaRepasoModel.Disco">
+              <MappingFragment StoreEntitySet="Disco">
+                <ScalarProperty Name="IdGeneromusical" ColumnName="IdGeneromusical" />
+                <ScalarProperty Name="IdArtista" ColumnName="IdArtista" />
+                <ScalarProperty Name="Disponibilidad" ColumnName="Disponibilidad" />
+                <ScalarProperty Name="Ventas" ColumnName="Ventas" />
+                <ScalarProperty Name="Distribuidora" ColumnName="Distribuidora" />
+                <ScalarProperty Name="Anio" ColumnName="Anio" />
+                <ScalarProperty Name="Duracion" ColumnName="Duracion" />
+                <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+                <ScalarProperty Name="IdDisco" ColumnName="IdDisco" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

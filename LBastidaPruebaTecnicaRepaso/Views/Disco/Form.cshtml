@@ -1,0 +1,77 @@
+﻿@model ML.Disco
+@{
+    ViewBag.Title = "Form";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div style="text-align:center">
+    <h2>Registrar Disco</h2>
+</div>
+
+@using (Html.BeginForm("Form", "Disco", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.HiddenFor(model => model.IdDisco)
+    <form class="form-control">
+        <fieldset>
+            <legend>Datos del Disco</legend>
+            <div class="row" style="margin-top:5rem; margin-left:14rem">
+                <div class="col-md-3">
+                    @Html.LabelFor(model => model.Titulo)
+                    <br />
+                    @Html.TextBoxFor(model => model.Titulo, new {placeholder = "Titulo"})
+                </div>
+
+                <div class="col-md-3">
+                    @Html.LabelFor(model => model.Duracion)
+                    <br />
+                    @Html.TextBoxFor(model => model.Duracion)
+                </div>
+
+                <div class="col-md-3">
+                    @Html.LabelFor(model => Model.Anio)
+                    <br />
+                    @Html.TextBoxFor(model => model.Anio, new { placeholder = "Año" })
+                </div>
+            </div>
+
+            <div class="row" style="margin-top:5rem; margin-left:14rem">
+                <div class="col-md-3">
+                    @Html.LabelFor(model => model.Distribuidora)
+                    <br />
+                    @Html.TextBoxFor(model => model.Distribuidora, new { placeholder = "Distribuidora" })
+                </div>
+
+                <div class="col-md-3">
+                    @Html.LabelFor(model => model.Ventas)
+                    <br />
+                    @Html.TextBoxFor(model => model.Ventas, new { placeholder = "Numero de ventas" })
+                </div>
+
+                <div class="col-md-3">
+                    @Html.LabelFor(model => model.Disponibilidad)
+                    <br />
+                    @Html.TextBoxFor(model => model.Disponibilidad, new { placeholder = "Ingresa si/no" })
+                </div>
+
+            </div>
+
+
+            <div class="row" style="margin-top:5rem; margin-left:14rem">
+                <div class="col-md-6">
+                    @Html.LabelFor(model => model.Artista.IdArtista)
+                    <br />
+                    @Html.DropDownListFor(model => model.Artista.IdArtista, new SelectList(Model.Artista.Artistas, "IdArtista", "NombreArtistico"), "Seleccione un artista", new { @class = "form-control"  })
+                </div>
+
+                <div class="col-md-6">
+                    @Html.LabelFor(model => model.GeneroMusical.IdGeneroMusical)
+                    <br />
+                    @Html.DropDownListFor(model => model.GeneroMusical.IdGeneroMusical, new SelectList(Model.GeneroMusical.Generos, "IdGeneroMusical", "Nombre"), "Seleccione un genero", new { @class = "form-control" })
+                </div>
+
+            </div>
+        </fieldset>
+
+        <button type="submit" class="btn btn-success">Guardar Disco</button>
+    </form>
+}
+

@@ -1,0 +1,42 @@
+﻿@model ML.Artista
+@{
+    ViewBag.Title = "GetAll";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div style="text-align:center">
+    <h2>Artistas Registrados</h2>
+</div>
+<div class="table-responsive" style="margin-top:5rem">
+    <a style="margin-bottom:2rem" class="btn btn-success" href="@Url.Action("Form", "Artista")">Agregar</a>
+    <table class="table">
+        <thead>
+            <tr class="bg-primary">
+                <th>IdArtista</th>
+                <th>Nombre Artistico</th>
+                <th>Nombre</th>
+                <th>Apellido Paterno</th>
+                <th>Apellido Materno</th>
+                <th>Fecha de Nacimiento</th>
+                <th>Editar</th>
+                <th>Eliminar</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(ML.Artista artista in Model.Artistas)
+            {
+                <tr>
+                    <td>@artista.IdArtista</td>
+                    <td>@artista.NombreArtistico</td>
+                    <td>@artista.Nombre</td>
+                    <td>@artista.ApellidoPaterno</td>
+                    <td>@artista.ApellidoMaterno</td>
+                    <td>@artista.FechaNacimiento</td>
+                    <td><a class="btn btn-primary" href="@Url.Action("Form", "Artista", new {IdArtista = artista.IdArtista})">Editar</a></td>
+                    <td><a class="btn btn-danger" href="@Url.Action("Delete", "Artista", new {IdArtista = artista.IdArtista})" onclick="return confirm('¿Estas seguro de eliminar al artista?')">Eliminar</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+

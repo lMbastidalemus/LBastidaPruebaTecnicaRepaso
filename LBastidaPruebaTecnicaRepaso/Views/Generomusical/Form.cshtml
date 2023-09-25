@@ -1,0 +1,28 @@
+﻿@model ML.GeneroMusical
+@{
+    ViewBag.Title = "Form";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div style="margin-left:28rem">
+    <h2>Registrar Genero Musical</h2>
+</div>
+@using (Html.BeginForm("Form", "GeneroMusical", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.HiddenFor(model => Model.IdGeneroMusical); ///ESto es para actualizar
+   
+    <form class="form-control">
+        <fieldset>
+            <div class="row" style="margin-left:28rem; margin-top:6rem">
+                <div class="col-lg-6">
+                    @Html.LabelFor(model => model.Nombre)
+                    @Html.TextBoxFor(model => model.Nombre)
+                </div>
+            </div>
+        </fieldset>
+        <button type="submit" class="btn btn-success">Enviar datos</button>
+    </form>
+
+
+}
+
